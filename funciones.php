@@ -27,8 +27,25 @@
     function selecciona_porcentaje($id)	{
         $sql = "SELECT porcentaje FROM cola WHERE id='" . $id . "'";
         $result = mysql_query($sql, $GLOBALS['cnx']);
+        return $result;        
+    }
+    function comprueba_ip($ip)	{
+        $sql = "SELECT * FROM cola WHERE ip='".$ip."'";
+        $result = mysql_query($sql, $GLOBALS['cnx']);
         return $result;
-        
+    }
+    function inserta_videos_almacenados($url)	{
+        $sql = "INSERT INTO videos_almacenados (url,fecha) values('".$url."',sysdate())";
+        mysql_query($sql, $GLOBALS['cnx']);
+    }
+    function elimina_cola($ip)	{
+        $sql = "DELETE FROM cola where ip='".$ip."'";
+        mysql_query($sql, $GLOBALS['cnx']);
+    }
+    function busca_videos_almacenados($url)	{
+        $sql = "SELECT * FROM videos_almacenados WHERE url='".$url."'";
+        $result = mysql_query($sql, $GLOBALS['cnx']);
+        return $result;
     }
 
 ?>

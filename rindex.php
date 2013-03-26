@@ -1,16 +1,23 @@
 <?php
     include("header.php");
-    include("porcentaje.php");
-    //include("porcentaje.php");
+    function isValidYoutubeURL($url) {
+        if ((strstr($url,"youtube.com/watch?v=")) && (strlen(strstr($url,"watch?v=")) == "19")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    $url=$_POST['idUrl'];
+    $urlbuena=$_POST['url'];
     $ip=$_SERVER['REMOTE_ADDR'];
     $porcentaje = '0%';
-    $url=$_POST['url'];
+    if (isValidYoutubeURL($urlbuena)) {
     inserta_cola($url, $porcentaje, $ip);
     $resultado1 = selecciona_id($url, $ip);
     if($fila = mysql_fetch_array($resultado1)) {
-        for ($p = 0; $p <= 10; $p += 5) {
-            mysql_query('UPDATE COLA SET PORCENTAJE=' . $p . ' WHERE ID='.$fila['id']);
-            sleep(5);
-        }
-    }    
+       echo $fila['id'];
+    }
+} else {
+    echo "No existe";
+}
 ?>
