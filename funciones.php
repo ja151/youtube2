@@ -19,6 +19,7 @@
     function actualiza_porcentaje($id){
         for ($p = 0; $p <= 10; $p += 5) {
             $sql = sprintf('UPDATE COLA SET PORCENTAJE=' . $p . ' WHERE ID=' . $id, mysql_real_escape_string($id));
+            $sql = htmlentities($sql);
             mysql_query($sql, $GLOBALS['cnx']);
             sleep(1);
         }
