@@ -16,7 +16,7 @@
     <script src="jquery-1.8.3.min.js" type="text/javascript"></script>
     <script type="text/javascript">  
     $(document).ready(function() {
-        function idYoutube(url){
+        function idYoutube(url){ //Extrae el id del video
             var youtube_id;
             youtube_id = url.replace(/^[^v]+v.(.{11}).*/,"$1");
             return youtube_id;
