@@ -1,6 +1,3 @@
-<?php
-    header('Content-Type: text/html; charset=encoding');
-?>
 <html>
 <head>
 </head>

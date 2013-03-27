@@ -1,15 +1,18 @@
 <?php
     function inserta_cola($url,$porcentaje,$ip)	{
-        $sql = "INSERT INTO cola (url,porcentaje,ip) values('".$url."','".$porcentaje."','".$ip."')";
+        $sql = sprintf("INSERT INTO cola (url,porcentaje,ip) values('%s','%s','%s')", mysql_real_escape_string($url), mysql_real_escape_string($porcentaje), mysql_real_escape_string($ip));
+        $sql = htmlentities($sql);
         mysql_query($sql, $GLOBALS['cnx']);
     }
     function selecciona_videos($url)	{
-        $sql = "SELECT url FROM videos_almacenados WHERE url=".$url;
+        $sql = sprintf("SELECT url FROM videos_almacenados WHERE url='%s'", mysql_real_escape_string($url));
+        $sql = htmlentities($sql);
         $result = mysql_query($sql, $GLOBALS['cnx']);
-        return $result;
+        return $result;        
     }
     function busca_ip($ip)	{
-        $sql = "SELECT ip FROM cola WHERE ip='".$ip."'";
+        $sql = sprintf("SELECT ip FROM cola WHERE ip='%s'", mysql_real_escape_string($ip));
+        $sql = htmlentities($sql);
         $result = mysql_query($sql, $GLOBALS['cnx']);
         return $result;
     }
@@ -20,30 +23,36 @@
         }
     }
     function selecciona_id($url, $ip)	{
-        $sql = "SELECT id FROM cola WHERE url='".$url."' and ip='".$ip."'";
+        $sql = sprintf("SELECT id FROM cola WHERE url='%s' and ip='%s'", mysql_real_escape_string($url), mysql_real_escape_string($ip));
+        $sql = htmlentities($sql);
         $result = mysql_query($sql, $GLOBALS['cnx']);
         return $result;
     }
     function selecciona_porcentaje($id)	{
-        $sql = "SELECT porcentaje FROM cola WHERE id='" . $id . "'";
+        $sql = sprintf("SELECT porcentaje FROM cola WHERE id='%s'", mysql_real_escape_string($id));
+        $sql = htmlentities($sql);
         $result = mysql_query($sql, $GLOBALS['cnx']);
         return $result;        
     }
     function comprueba_ip($ip)	{
-        $sql = "SELECT * FROM cola WHERE ip='".$ip."'";
+        $sql = sprintf("SELECT * FROM cola WHERE ip='%s'", mysql_real_escape_string($ip));
+        $sql = htmlentities($sql);
         $result = mysql_query($sql, $GLOBALS['cnx']);
         return $result;
     }
     function inserta_videos_almacenados($url)	{
-        $sql = "INSERT INTO videos_almacenados (url,fecha) values('".$url."',sysdate())";
+        $sql = sprintf("INSERT INTO videos_almacenados (url,fecha) values('%s',sysdate())", mysql_real_escape_string($url));
+        $sql = htmlentities($sql);
         mysql_query($sql, $GLOBALS['cnx']);
     }
     function elimina_cola($ip)	{
-        $sql = "DELETE FROM cola where ip='".$ip."'";
+        $sql = sprintf("DELETE FROM cola where ip='%s'", mysql_real_escape_string($ip));
+        $sql = htmlentities($sql);
         mysql_query($sql, $GLOBALS['cnx']);
     }
     function busca_videos_almacenados($url)	{
-        $sql = "SELECT * FROM videos_almacenados WHERE url='".$url."'";
+        $sql = sprintf("SELECT * FROM videos_almacenados WHERE url='%s'", mysql_real_escape_string($url));
+        $sql = htmlentities($sql);
         $result = mysql_query($sql, $GLOBALS['cnx']);
         return $result;
     }
